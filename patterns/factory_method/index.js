@@ -1,8 +1,8 @@
-const init = (canvas, ctx) => {
+const init = (Canvas) => {
     console.log("Factory Method init");
 }
 
-const loop = (canvas, ctx) => {
+const loop = (Canvas) => {
     console.log("Factory Method loop");
 }
 

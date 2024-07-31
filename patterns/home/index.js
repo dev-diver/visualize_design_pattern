@@ -1,8 +1,8 @@
-const init = (canvas, ctx) => {
+const init = (Canvas) => {
     console.log("Home init");
 }
 
-const loop = (canvas, ctx) => {
+const loop = (Canvas) => {
     console.log("Home loop");
 }
 

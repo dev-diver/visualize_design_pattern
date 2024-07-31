@@ -1,6 +1,9 @@
 
 
 export default class Canvas{
+
+    objs = []
+
     constructor(){
         if(Canvas.instance){
             return Canvas.instance;
@@ -20,6 +23,9 @@ export default class Canvas{
         this.setSize();
         this.newScene(() => {}, () => {});
         window.addEventListener("resize", () => this.setSize());
+        window.addEventListener("click", (e) => {
+            this.objs.forEach(obj => obj.onClick(e));
+        })
     }
 
     dispose(){
@@ -27,10 +33,9 @@ export default class Canvas{
     }
 
     newScene(init, loop){
-        console.log(init, loop);
         this.init = init;
         this.loop = loop;
-        this.init(this.canvas, this.ctx);
+        this.init(this);
         window.requestAnimationFrame(() => this.anim());
     }
 
@@ -49,7 +54,8 @@ export default class Canvas{
         this.previousTime = this.currentTime;
 
         this.drawBackground();
-        this.loop(this.canvas, this.ctx);
+        this.loop(this);
+        this.display();
 
         window.requestAnimationFrame(() => this.anim());
     }
@@ -60,6 +66,10 @@ export default class Canvas{
 
     initAnim(){
         this.anim();
+    }
+
+    display(){
+        this.objs.forEach(obj => obj.display(this.canvas,this.ctx));
     }
 }
 
